@@ -3,7 +3,7 @@ from starlette import status
 
 
 def test_healthcheck(client: TestClient) -> None:
-    response = client.get("/health")
+    result = client.get("/health")
 
-    assert response.status_code == status.HTTP_200_OK
-    assert response.json() == {"status": "ok"}
+    assert result.status_code == status.HTTP_200_OK
+    assert result.json() == {"status": "ok"}
