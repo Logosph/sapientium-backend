@@ -21,15 +21,15 @@ class Settings(BaseSettings):
 
     @property
     def mongodb_uri(self) -> str:
-        u = quote_plus(self.mongo_user)
-        p = quote_plus(self.mongo_password)
-        a = quote_plus(self.mongo_auth_source)
+        encoded_user = quote_plus(self.mongo_user)
+        encoded_password = quote_plus(self.mongo_password)
+        encoded_auth_source = quote_plus(self.mongo_auth_source)
         return (
             f"mongodb://"
-            f"{f'{u}:{p}@' if self.mongo_user else ''}"
+            f"{f'{encoded_user}:{encoded_password}@' if self.mongo_user else ''}"
             f"{self.mongo_host}:{self.mongo_port}"
             f"{f'/{self.mongo_db}' if self.mongo_db else ''}"
-            f"{f'?authSource={a}' if self.mongo_auth_source else ''}"
+            f"{f'?authSource={encoded_auth_source}' if self.mongo_auth_source else ''}"
         )
 
 
